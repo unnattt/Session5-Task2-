@@ -8,8 +8,8 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] Joystick fixedJoystick;
     [SerializeField] Animator playerAnim;
     [SerializeField] Rigidbody playerRB;
-    [SerializeField] float VlSpeed = 2f;
-    [SerializeField] float HlSpeed = 2f;
+        [SerializeField] float VlSpeed = 2f;
+        [SerializeField] float HlSpeed = 2f;
     [SerializeField] GameObject player;
     Vector3 direction;
     float hZInput;

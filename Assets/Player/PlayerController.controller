@@ -9,7 +9,7 @@ BlendTree:
   m_Name: Walking
   m_Childs:
   - serializedVersion: 2
-    m_Motion: {fileID: 7400000, guid: 56ae1f4e8a8984e98ac0f8f58ae76a00, type: 2}
+    m_Motion: {fileID: 7400000, guid: 421d8eedb35c141f59a9ac19628c547a, type: 2}
     m_Threshold: 0
     m_Position: {x: 0, y: 0}
     m_TimeScale: 1
