@@ -8,8 +8,8 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] Joystick fixedJoystick;
     [SerializeField] Animator playerAnim;
     [SerializeField] Rigidbody playerRB;
-        [SerializeField] float VlSpeed = 2f;
-        [SerializeField] float HlSpeed = 2f;
+    [SerializeField] float VlSpeed = 2f;
+    [SerializeField] float HlSpeed = 2f;
     [SerializeField] GameObject player;
     Vector3 direction;
     float hZInput;
@@ -47,11 +47,6 @@ public class PlayerMovement : MonoBehaviour
         {
             HlSpeed = 5f;
         }
-
-        //if( vLInput != 0f)
-        //{
-        //    playerRB.velocity = player.transform.forward * VlSpeed;
-        //}
 
         direction = Vector3.right * hZInput + Vector3.forward * vLInput;
         playerRB.velocity = new Vector3((direction * HlSpeed).x, playerRB.velocity.y, (direction * VlSpeed).z);

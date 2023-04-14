@@ -1,54 +1,52 @@
 using UnityEngine;
-using UnityEngine.EventSystems;
 
     public class AimStateManager : MonoBehaviour
 {
-    public float xAxis, yAxis;
-    [SerializeField] float mouseSense = 1;
-    [SerializeField] Transform cam;
+    public Transform target;
+    public float sensitivity = 1.0f;
+    public float minYAngle = -20.0f;
+    public float maxYAngle = 20.0f;
+    public float distance = 5.0f;
+    private float currentX;
+    public float heightOffset = 1.0f;
+    private float currentY;
 
-    void Start()
-    {
-
-    }
-
-    
+    //for mouse Control
+    //void Update()
+    //{
+    //    currentX += Input.GetAxis("Mouse X") * sensitivity;
+    //    currentY -= Input.GetAxis("Mouse Y") * sensitivity;
+    //    currentY = Mathf.Clamp(currentY, minYAngle, maxYAngle);
+    //}
     void Update()
     {
-        var eventSystem = EventSystem.current;
-
-        for (int i = 0; i < Input.touchCount; i++)
+        if (Input.touchCount == 1 ) // if only one finger is touching the screen
         {
-            var touch = Input.GetTouch(i);
-            if (eventSystem.IsPointerOverGameObject(touch.fingerId))
+            Touch touch = Input.GetTouch(0);// get the first touch
+
+            // Check if touch is on the right side of the screen
+            if (touch.position.x > Screen.width / 2 )
             {
-                continue;
-            }
-            else
-            {
-                ConnectPlayerToCamera();
-                break;
+                if (touch.phase == TouchPhase.Moved)// if the touch has moved
+                {
+                    currentX += touch.deltaPosition.x * sensitivity;
+                    currentY -= touch.deltaPosition.y * sensitivity;
+                    currentY = Mathf.Clamp(currentY, minYAngle, maxYAngle);
+                }
             }
         }
-
-        ConnectPlayerToCamera();
     }
 
-    private void LateUpdate()
+    void LateUpdate()
     {
-          cam.localEulerAngles = new Vector3(yAxis, cam.localEulerAngles.y, cam.localEulerAngles.z);
-          transform.eulerAngles = new Vector3(transform.eulerAngles.x, xAxis, transform.eulerAngles.z);
-    }
+        Vector3 dir = new Vector3(0, 0, -distance);
+        Quaternion rotation = Quaternion.Euler(currentY, currentX, 0);
+        transform.position = target.position + rotation * dir + Vector3.up * heightOffset;
+        transform.rotation = rotation;
 
-
-    void ConnectPlayerToCamera()
-    {
-        if (Input.GetMouseButton(0))
+        if (Input.anyKey)
         {
-            xAxis += Input.GetAxisRaw("Mouse X") * mouseSense;
-            yAxis -= Input.GetAxisRaw("Mouse Y") * mouseSense;
-            yAxis = Mathf.Clamp(yAxis, -80, 80);
+            target.transform.rotation = Quaternion.AngleAxis(currentX, Vector3.up);
         }
-         
     }
 }
