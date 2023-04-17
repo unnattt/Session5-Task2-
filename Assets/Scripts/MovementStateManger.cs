@@ -25,30 +25,6 @@ public class MovementStateManger : MonoBehaviour
         SetMoveAnimation();
     }
 
-        //if (Input.GetKeyDown(KeyCode.Space) && verticalInput > 0f)
-        //{
-        //    animator.SetTrigger("RunningJump");
-        //    Jump();
-
-        //}
-
-
-        //if (Input.GetKeyDown(KeyCode.Space) && verticalInput < 0f)
-        //{
-        //    animator.SetTrigger("BackwardsJump");
-        //    //Jump();
-        //}
-
-
-        //// Jump
-        //if (Input.GetKeyDown(KeyCode.Space) && verticalInput == 0 && horizontalInput == 0)
-        //{
-        //    StartCoroutine(JumpDelay());
-        //    animator.SetTrigger("isJumping");
-        //    //rb.velocity += Vector3.up * jumpForce;
-        //}
-    
-
     public void PlayerJump()
     {
         if (jump == false)
@@ -58,8 +34,6 @@ public class MovementStateManger : MonoBehaviour
             rb.velocity = Vector2.up * jumpForce;
         }
     }
-
-
     public void playerAttack()
     {
         playerAnim.SetTrigger("attack");
@@ -72,8 +46,6 @@ public class MovementStateManger : MonoBehaviour
             jump = false;
         }
     }
-
-
     public void PlayerMovements()
     {
         horizontalInput = fixedJoystick.Horizontal;
@@ -81,7 +53,7 @@ public class MovementStateManger : MonoBehaviour
 
         if (verticalInput > 0.5f)
         {
-            VlSpeed = 6f;
+            VlSpeed = 8f;
         }
         else if (verticalInput < 0.5f)
         {
@@ -90,7 +62,7 @@ public class MovementStateManger : MonoBehaviour
 
         if (horizontalInput > 0.5f)
         {
-            HlSpeed = 6f;
+            HlSpeed = 8f;
         }
         else if (horizontalInput < 0.5f)
         {
@@ -98,7 +70,7 @@ public class MovementStateManger : MonoBehaviour
         }
         if (horizontalInput < -0.5f)
         {
-            HlSpeed = 6f;
+            HlSpeed = 8f;
         }
 
         // Calculate movement direction based on camera
@@ -113,14 +85,5 @@ public class MovementStateManger : MonoBehaviour
         playerAnim.SetFloat("hZInput", horizontalInput);
         playerAnim.SetFloat("vLInput", verticalInput);
     }
-
-    //IEnumerator JumpDelay()
-    //{
-    //    yield return new WaitForSeconds(JumpDelayduration);
-
-    //    Jump();
-
-    //    //animator.SetTrigger("Explosion");
-    //}
 }
       
